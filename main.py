@@ -96,7 +96,7 @@ def main():
         print("Using test case:")
         worker("I:\\temp\\Daily_temp\\old","I:\\temp\\Daily_temp\\new",readDirectory("I:\\temp\\Daily_temp\\old"))
     else:
-        worker(init())
+        worker(*init())
 
 
 
