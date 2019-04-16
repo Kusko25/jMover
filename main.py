@@ -4,6 +4,13 @@ import hashlib
 import tqdm
 import sys
 
+def makeFolder(path):
+    if path=="" or os.path.exists(path):
+        pass
+    else:
+        makeFolder(os.path.split(path)[0])
+        os.mkdir(path)
+
 def readDirectory(path):
     files = []
     for r,d,f in os.walk(path):
@@ -29,7 +36,7 @@ def scanPath(prompt):
             path = os.path.dirname(path)
         elif not os.path.exists(path):
             if input("Path does not exist. Create? (y/n)\n")[0]=='y':
-                os.mkdir(path)
+                makeFolder(path)
             else:
                 valid = False
     return path
@@ -43,12 +50,6 @@ def hashCheck(src,dst):
         hash2 = hasher2.hexdigest()
         return hash1==hash2
 
-def makeFolder(path):
-    if path=="" or os.path.exists(path):
-        pass
-    else:
-        makeFolder(os.path.split(path)[0])
-        os.mkdir(path)
 def init():
     src = scanPath("Enter source path:")
     dst = scanPath("Enter destination path:")
